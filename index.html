@@ -17,32 +17,91 @@
     h1 {
       margin-bottom: 20px;
     }
-    /* The gift box div, initially showing a 'closed' image */
+
+    /* Container for our box + items (400×400) */
     #giftBox {
-      width: 250px;
-      height: 250px;
-      background-image: url('closed-box.png'); /* A static or closed-box image */
+      width: 400px;
+      height: 400px;
+      position: relative; 
+      background-image: url('closed-box.png'); 
       background-size: cover;
       background-position: center;
       transition: transform 0.5s, background-image 0.5s;
       cursor: pointer;
     }
-    /* When the box is "open," show your animated GIF */
+
+    /* Bowknot covers the entire box area (still the same size as the box) */
+    #bowknot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('bowknot.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /*
+      Drum and sticks: now 180×180
+      Adjust as needed
+    */
+    #drum, 
+    #sticks {
+      position: absolute;
+      display: none; /* hidden by default */
+      width: 180px;   
+      height: 180px;  
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Drum on the right side */
+    #drum {
+      background-image: url('drum.png');
+      right: -90px;  /* half of 180 is 90, so it's centered vertically on the right edge */
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Sticks on the left side */
+    #sticks {
+      background-image: url('sticks.png');
+      left: -90px;   
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* When the box is open, show lion-gift.gif (still 400×400) */
     #giftBox.open {
-      background-image: url('lion-gift.gif');  /* This is your "open" GIF */
+      background-image: url('lion-gift.gif');
+      background-size: cover;
+      background-position: center;
       transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Hide bowknot, show drum & sticks in open state */
+    #giftBox.open #bowknot {
+      display: none;
+    }
+    #giftBox.open #drum,
+    #giftBox.open #sticks {
+      display: block;
     }
   </style>
 </head>
 <body>
   <h1>小方老师，请打开礼盒！</h1>
 
-  <div id="giftBox"></div>
+  <div id="giftBox">
+    <div id="bowknot"></div>
+    <div id="drum"></div>
+    <div id="sticks"></div>
+  </div>
 
   <script>
     const giftBox = document.getElementById('giftBox');
-    
-    // Toggle between closed and open states
     giftBox.addEventListener('click', () => {
       giftBox.classList.toggle('open');
     });
