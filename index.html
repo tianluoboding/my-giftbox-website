@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gift Box Animation</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background: #fafafa;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    /* The gift box div, initially showing a 'closed' image */
+    #giftBox {
+      width: 250px;
+      height: 250px;
+      background-image: url('closed-box.png'); /* A static or closed-box image */
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s, background-image 0.5s;
+      cursor: pointer;
+    }
+    /* When the box is "open," show your animated GIF */
+    #giftBox.open {
+      background-image: url('lion-gift.gif');  /* This is your "open" GIF */
+      transform: scale(1.1) rotate(5deg);
+    }
+  </style>
+</head>
+<body>
+  <h1>小方老师，请打开礼盒！</h1>
+
+  <div id="giftBox"></div>
+
+  <script>
+    const giftBox = document.getElementById('giftBox');
+    
+    // Toggle between closed and open states
+    giftBox.addEventListener('click', () => {
+      giftBox.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
